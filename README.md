@@ -20,12 +20,15 @@ example.py 돌리면 첨부파일에 같이 있는 png 파일대로 결과 나�
 
 
 >Score 공유(종완)
--ETH
+
+ETH
 print(df_score["onechart_score"].mean()) : 0.03135716018707601
 print(df_score[mask]["onechart_score"].mean()) : 0.44614434628215444
 
+BERA
 print(df_score["onechart_score"].mean() : 0.051387965329048414
 print(df_score[mask]["onechart_score"].mean()) : 0.49410255477772713
 
+YFI
 print(df_score["onechart_score"].mean() : 0.0684620202397954
 print(df_score[mask]["onechart_score"].mean()) : 0.34212219357360485
