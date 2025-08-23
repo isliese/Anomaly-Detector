@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import mplfinance as mpf
 
-# CSV 파일 로드 및 시간 필터링
+# CSV 파일 로드 및 시간 필터링 함수
 def load_csv(path, start_date=None, end_date=None):
     """
     path: csv파일 경로
@@ -32,7 +32,7 @@ def load_csv(path, start_date=None, end_date=None):
     return df
 
 
-# rolling IQR 계산 (Q1, Q3, IQR)
+# rolling IQR 계산 (Q1, Q3, IQR) 함수
 def iqr_threshold(series, lb, shift):
     Q1 = series.rolling(lb).quantile(0.25).shift(shift)
     Q3 = series.rolling(lb).quantile(0.75).shift(shift)
@@ -40,7 +40,7 @@ def iqr_threshold(series, lb, shift):
     return Q1, Q3, IQR
 
 
-# IQR 기반 이상탐지 (수익률, 거래량 기준)
+# IQR 기반 이상탐지 (수익률, 거래량 기준) 함수
 def detect_anomalies_iqr(
     df: pd.DataFrame,
     lookback: int = 100,          # IQR 계산용 롤링 길이(분)
@@ -152,7 +152,7 @@ def detect_anomalies_iqr(
     return out
 
 
-# 1차트 데이터(std 기반)에서 이상탐지 점수 계산
+# 1차트 데이터(std 기반)에서 이상탐지 점수 계산 함수
 def onechart_score(min_df, onechart_df, std_count_scaling=False, shift=1, lookback=100, k=1.5):
     out = min_df.copy()
 
@@ -184,7 +184,7 @@ def onechart_score(min_df, onechart_df, std_count_scaling=False, shift=1, lookba
     return out
 
 
-# 이상탐지 결과 캔들차트 + scatter 표시
+# 이상탐지 결과 캔들차트 + scatter 표시 함수
 def plot_anomaly(df, idx, anomaly_key="is_anomaly"):
     """
     df: time 정렬된 1분봉 DataFrame (columns에 close, volume 포함)
@@ -197,7 +197,7 @@ def plot_anomaly(df, idx, anomaly_key="is_anomaly"):
     mpf.plot(df.iloc[idx[0]:idx[1]], type='candle', style='yahoo', addplot=add_plots, volume=True)
 
 
-# 이상 점수 기반 캔들차트 + scatter 표시
+# 이상 점수 기반 캔들차트 + scatter 표시 함수
 def plot_anomaly_score(df, idx, q, anomaly_key="score"):
     threshold = df[anomaly_key].quantile(q)
     score_points = np.where(df[anomaly_key] > threshold, df['close'], np.nan)
