@@ -190,18 +190,38 @@ def plot_anomaly(df, idx, anomaly_key="is_anomaly"):
     df: time 정렬된 1분봉 DataFrame (columns에 close, volume 포함)
     반환: 원본 + IQR기준 이상탐지 결과 컬럼들
     """
-    score_points = np.where(df[anomaly_key] == 1, df['close'], np.nan)
+    # threshold 이상 점에 scatter 표시
+    score_points = np.where(df[anomaly_key] > threshold, df['close'], np.nan)
     add_plots = [
-        mpf.make_addplot(score_points[idx[0]:idx[1]], type='scatter', marker='o', markersize=10, color='blue'),
+        mpf.make_addplot(score_points[idx[0]:idx[1]], type='scatter', marker='o', markersize=10, color='red'),
+        # threshold 수평선 추가
+        mpf.make_addplot([threshold]*len(df.iloc[idx[0]:idx[1]]), type='line', linestyle='--', color='orange')
     ]
-    mpf.plot(df.iloc[idx[0]:idx[1]], type='candle', style='yahoo', addplot=add_plots, volume=True)
+    
+    mpf.plot(
+        df.iloc[idx[0]:idx[1]],
+        type='candle',
+        style='yahoo',
+        addplot=add_plots,
+        volume=True,
+        title=f"{title} (Threshold: {threshold:.4f})"
+    )
 
 
 # 이상 점수 기반 캔들차트 + scatter 표시 함수
-def plot_anomaly_score(df, idx, q, anomaly_key="score"):
+def plot_anomaly_score(df, idx, q, anomaly_key="score", title=""):
     threshold = df[anomaly_key].quantile(q)
     score_points = np.where(df[anomaly_key] > threshold, df['close'], np.nan)
     add_plots = [
         mpf.make_addplot(score_points[idx[0]:idx[1]], type='scatter', marker='o', markersize=10, color='blue'),
     ]
-    mpf.plot(df.iloc[idx[0]:idx[1]], type='candle', style='yahoo', addplot=add_plots, volume=True)
+    
+    # 제목 설정 - title이 제공되면 사용, 아니면 기본값
+    chart_title = title if title else f"Anomaly Detection (Threshold: {threshold:.4f})"
+    
+    mpf.plot(df.iloc[idx[0]:idx[1]], 
+             type='candle', 
+             style='yahoo', 
+             addplot=add_plots, 
+             volume=True,
+             title=chart_title)
