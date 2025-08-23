@@ -16,19 +16,19 @@ example.py 돌리면 첨부파일에 같이 있는 png 파일대로 결과 나�
 
 쓴 라이브러리가 `pandas`, `numpy`, `mplfinance`밖에 없어서 버젼차이로 안돌아가고 할 건 없을 것 같은데 혹시 에러나면 알려주세요!!
 
--재연님-  
+-재연님-
 
 
-> ## Score 공유(종완)  
-
-### ETH  
-print(df_score["onechart_score"].mean()) : 0.03135716018707601  
-print(df_score[mask]["onechart_score"].mean()) : 0.44614434628215444  
-
-### BERA  
-print(df_score["onechart_score"].mean() : 0.051387965329048414  
-print(df_score[mask]["onechart_score"].mean()) : 0.49410255477772713  
+> ## 종완(재연님 모듈 실행 결과 공유)
 
 ### YFI  
-print(df_score["onechart_score"].mean() : 0.0684620202397954  
-print(df_score[mask]["onechart_score"].mean()) : 0.34212219357360485  
+전체 이상치 점수 : 0.0684620202397954  
+백분위 95% 초과 이상치 점수 : 0.34212219357360485  
+
+### ETH  
+전체 이상치 점수 : 0.03135716018707601  
+백분위 95% 초과 이상치 점수 : 0.44614434628215444  
+
+### BERA  
+전체 이상치 점수 : 0.051387965329048414  
+백분위 95% 초과 이상치 점수 : 0.49410255477772713  
