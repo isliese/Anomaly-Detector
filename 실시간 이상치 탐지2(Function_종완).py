@@ -121,7 +121,7 @@ def grid_search_anomaly(df, onechart_df, param_grid):
         param_grid['threshold'],
         param_grid['price_weight']
     ):
-        volume_w = 1 - price_w
+        volume_w = 1 - price_w              # volume_weight 계산
 
         scorer = AnomalyScorer(df.copy())
         try:
