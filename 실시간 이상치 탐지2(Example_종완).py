@@ -51,9 +51,9 @@ if __name__ == "__main__":
     df_1chart = load_csv(path_1chart)
 
     param_grid = {
-        "lookback": [60, 80, 100, 120],
-        "k_ret": [1.2, 1.5, 2.0],
-        "k_vol": [1.2, 1.5, 2.0]
+        "lookback": [10, 20, 30, 50],
+        "k_ret": [0.6, 0.7, 0.8],
+        "k_vol": [0.3, 0.5, 0.7]
     }
 
     best_params, best_lift, best_result = grid_search_best_params(df, df_1chart, param_grid)
