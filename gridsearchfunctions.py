@@ -1,4 +1,3 @@
-# anomaly_detection_pipeline.py
 import time
 import pandas as pd
 import numpy as np
@@ -171,4 +170,5 @@ if __name__ == "__main__":
     print(search_result.head(5))
     
     end_time = time.time()  # 끝난 시간 기록
+
     print(f"\n⏱️ 총 실행 시간: {end_time - start_time:.2f}초")
