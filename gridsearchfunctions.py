@@ -105,7 +105,7 @@ class AnomalyScorer:
 # ============================
 
 def evaluate_scorer(anomaly_df, onechart_df):
-    scored_df = onechart_score(anomaly_df, onechart_df) # 기존 1분봉 anomaly_df에 틱 기반 onechart_score 계산해서 붙임
+    scored_df = onechart_score(anomaly_df, onechart_df)
     a = scored_df["realtime_score"].fillna(0)
     b = scored_df["onechart_score"].fillna(0)
     corr, _ = spearmanr(a, b)
@@ -214,4 +214,5 @@ if __name__ == "__main__":
         plot_grid_search_heatmap(search_result)
         
     end_time = time.time()
+
     print(f"\n⏱️ 총 실행 시간: {end_time - start_time:.2f}초")
